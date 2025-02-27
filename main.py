@@ -26,9 +26,9 @@ try:
     login_input.clear()
     password_input.clear()
     login_input.send_keys(login)
-    time.sleep(1 + rd.random()*(3-1))    
+    time.sleep(3 + rd.random()*(2))    
     password_input.send_keys(password)
-    time.sleep(1 + rd.random()*(3-1))
+    time.sleep(3 + rd.random()*(2))
     button_send.click()
 
 except Exception as ex:
@@ -38,13 +38,13 @@ for number_of_page in range(1, 3): # range от 1 до 3 это с первой 
                                    # Оставил две страницы чтобы была пагинация и не нужно было долго ждать 
                                    # я не разобрался как отключить скачивание картинок, 
                                    # так что ждать загрузки сайта приходится долго :(
-    time.sleep(1 + rd.random()*(3-1))
+    time.sleep(3 + rd.random()*(2))
     counter = 0
     driver.get(domain + "/mods/page/" + str(number_of_page))
     elems = driver.find_elements(By.CLASS_NAME, 'post')
     max_counter = len(elems)
     while (counter < max_counter):
-        time.sleep(1 + rd.random()*(3-1))
+        time.sleep(3 + rd.random()*(2)))
         driver.get(domain + "/mods/page/" + str(number_of_page))
         elems = driver.find_elements(By.CLASS_NAME, 'post')
         link = elems[counter].find_element(By.TAG_NAME, 'a').get_attribute('href')
