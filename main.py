@@ -10,8 +10,8 @@ from selenium.webdriver.common.by import By
 domain = 'https://minecraft-inside.ru'
 table = pd.DataFrame(columns=['name', 'download link'])
 
-login = 'MID_SF' # id = loginform-username
-password = 'Z_X_C_TblCHKA_TblCHKA_BKB' # id = loginform-password
+login = input("Введите логин, для входа на сайт: ")
+password = input('Введите пароль, для входа на сайт: ') # id = loginform-password
 # button class = btn_primary
 
 options_fire_fox = webdriver.FirefoxOptions()
@@ -34,10 +34,15 @@ try:
 except Exception as ex:
     print(ex)
 
-for number_of_page in range(1, 3): # range от 1 до 3 это с первой страницы по вторую спарсить включительно. 
-                                   # Оставил две страницы чтобы была пагинация и не нужно было долго ждать 
-                                   # я не разобрался как отключить скачивание картинок, 
-                                   # так что ждать загрузки сайта приходится долго :(
+start = int(input('с какой страницы начать? :'))
+end = int(input('на какой странице закончить? (включительно):'))
+
+while (start < 0 or end < start or end > 1453):
+    print('вы ввели первую или последнюю страницу не правильно, повторите попытку')
+    start = int(input('с какой страницы начать? :'))
+    end = int(input('на какой странице закончить? (включительно):'))
+
+for number_of_page in range(start, end + 1): 
     time.sleep(3 + rd.random()*(2))
     counter = 0
     driver.get(domain + "/mods/page/" + str(number_of_page))
