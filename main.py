@@ -22,10 +22,15 @@ while (start < 0 or end < start or end > 1453):
     start = int(input('с какой страницы начать? :'))
     end = int(input('на какой странице закончить? (включительно):'))
 
-options_fire_fox = webdriver.FirefoxOptions()
-options_fire_fox.add_argument('Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0')
+options_chrome = webdriver.ChromeOptions()
+options_chrome.add_argument('Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0')
+options_chrome.add_argument('--blink-settings=imagesEnabled=false')
+options_chrome.add_argument('--disable-extensions')
+options_chrome.add_argument('--disable-popup-blocking')
+options_chrome.add_argument('--disable-notifications')
 
-driver = webdriver.Firefox(options=options_fire_fox)
+
+driver = webdriver.Chrome(options=options_chrome)
 try:
     driver.get('https://minecraft-inside.ru/login/')
     login_input = driver.find_element(By.ID, "loginform-username")
