@@ -14,6 +14,14 @@ login = input("Введите логин, для входа на сайт: ")
 password = input('Введите пароль, для входа на сайт: ') # id = loginform-password
 # button class = btn_primary
 
+start = int(input('с какой страницы начать? :'))
+end = int(input('на какой странице закончить? (включительно):'))
+
+while (start < 0 or end < start or end > 1453):
+    print('вы ввели первую или последнюю страницу не правильно, повторите попытку')
+    start = int(input('с какой страницы начать? :'))
+    end = int(input('на какой странице закончить? (включительно):'))
+
 options_fire_fox = webdriver.FirefoxOptions()
 options_fire_fox.add_argument('Mozilla/5.0 (X11; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0')
 
@@ -34,14 +42,6 @@ try:
 except Exception as ex:
     print(ex)
 
-start = int(input('с какой страницы начать? :'))
-end = int(input('на какой странице закончить? (включительно):'))
-
-while (start < 0 or end < start or end > 1453):
-    print('вы ввели первую или последнюю страницу не правильно, повторите попытку')
-    start = int(input('с какой страницы начать? :'))
-    end = int(input('на какой странице закончить? (включительно):'))
-
 for number_of_page in range(start, end + 1): 
     time.sleep(3 + rd.random()*(2))
     counter = 0
@@ -49,7 +49,7 @@ for number_of_page in range(start, end + 1):
     elems = driver.find_elements(By.CLASS_NAME, 'post')
     max_counter = len(elems)
     while (counter < max_counter):
-        time.sleep(3 + rd.random()*(2)))
+        time.sleep(3 + rd.random()*(2))
         driver.get(domain + "/mods/page/" + str(number_of_page))
         elems = driver.find_elements(By.CLASS_NAME, 'post')
         link = elems[counter].find_element(By.TAG_NAME, 'a').get_attribute('href')
