@@ -52,17 +52,16 @@ for number_of_page in range(start, end + 1):
     counter = 0
     driver.get(domain + "/mods/page/" + str(number_of_page))
     elems = driver.find_elements(By.CLASS_NAME, 'post')
+    links = list()
+    for elem in elems:
+        links.append(elem.find_element(By.TAG_NAME, 'a').get_attribute('href'))
     max_counter = len(elems)
-    while (counter < max_counter):
+    for link in links:
         time.sleep(3 + rd.random()*(2))
-        driver.get(domain + "/mods/page/" + str(number_of_page))
-        elems = driver.find_elements(By.CLASS_NAME, 'post')
-        link = elems[counter].find_element(By.TAG_NAME, 'a').get_attribute('href')
         driver.get(link)
         link2download = driver.find_element(By.CLASS_NAME, "dl__link").text
         name = driver.find_element(By.CLASS_NAME, "box__title").text.split('[')[0]
         table.loc[len(table)] = [name, link2download]
-        print(name, link2download)
         counter += 1
 table.to_csv('out.csv')
 driver.close()
