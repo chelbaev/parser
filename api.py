@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 DB_HOST = 'localhost'
 DB_NAME = 'your_database'
-DB_USER = 'postgres'
-DB_PASS = 'qwertyzxc'
+DB_USER = 'your_user'
+DB_PASS = 'tour_password'
 
 def get_db_connection():
     conn = psycopg2.connect(
@@ -40,7 +40,7 @@ def create_table():
 @app.route('/parse', methods=['GET'])
 def parse():
     # Вызов вашей функции парсинга
-    result = my_parse_funk('MID_SF', 'Z_X_C_TblCHKA_TblCHKA_BKB', 1, 1)
+    result = my_parse_funk('login', 'password', 1, 1)
 
     # Сохранение результата в базу данных
     conn = get_db_connection()
